@@ -6,14 +6,8 @@ const App = () => {
   const ESCAPE_KEY = 27; //tecla enter tabela asc
   const ENTER_KEY = 13; //teclas esc tabela asc
 
-  const initialTodos = [
-    { id: 1, title: "Estudar React", checked: false },
-    { id: 2, title: "Estudar Java", checked: true },
-    { id: 3, title: "Estudar Angular", checked: false },
-    { id: 4, title: "Estudar Sql", checked: false },
-  ];
-
-  const [todos] = useState(initialTodos);
+  
+  const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
 
   const erase = () => {
@@ -22,6 +16,17 @@ const App = () => {
 
   const submit = () => {
     console.log("submit", value);
+
+    setTodos([
+      ...todos,//array com os elementos anteriores
+      { //novo elemento do array
+        id: new Date().getTime(),//função para gerar um "id" com base no tempo
+        title: value, 
+        checked: false 
+      }
+    ]);
+
+
     erase();
   };
 
