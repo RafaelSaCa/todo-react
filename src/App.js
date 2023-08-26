@@ -6,7 +6,6 @@ const App = () => {
   const ESCAPE_KEY = 27; //tecla enter tabela asc
   const ENTER_KEY = 13; //teclas esc tabela asc
 
-  
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
 
@@ -18,14 +17,14 @@ const App = () => {
     console.log("submit", value);
 
     setTodos([
-      ...todos,//array com os elementos anteriores
-      { //novo elemento do array
-        id: new Date().getTime(),//função para gerar um "id" com base no tempo
-        title: value, 
-        checked: false 
-      }
+      ...todos, //array com os elementos anteriores
+      {
+        //novo elemento do array
+        id: new Date().getTime(), //função para gerar um "id" com base no tempo
+        title: value,
+        checked: false,
+      },
     ]);
-
 
     erase();
   };
@@ -40,6 +39,14 @@ const App = () => {
     } else if (event.which === ESCAPE_KEY) {
       erase();
     }
+  };
+
+  const onToggle = (todo) => {
+    //RISCAR CHECAR A TAREFA
+    setTodos(
+      todos.map((obj) =>
+      (obj.id === todo.id ? {...obj, checked: !todo.checked } : obj))
+    );
   };
 
   return (
@@ -58,8 +65,17 @@ const App = () => {
         />
         <ul className="todo-list">
           {todos.map((todo) => (
-            <li key={todo.id.toString()} >
-              <span className="todo">{todo.title}</span>
+            <li key={todo.id.toString()}>
+              <span
+                className={["todo",todo.checked ? 
+                "checked" : ""].join(" ")}
+                onClick={() => onToggle(todo)}
+                onKeyPress={() => onToggle(todo)}
+                role="button"
+                tabIndex={0}
+              >
+                {todo.title}
+              </span>
               <button className="remove" type="button">
                 <MdDelete size={28} />
               </button>
