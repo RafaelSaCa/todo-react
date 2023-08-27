@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
-const NewTodo = ({ onNewTodo }) => {
+
+
+const NewTodo = ({ onNewTodo}) => {
   const ESCAPE_KEY = 27; //tecla enter tabela asc
   const ENTER_KEY = 13; //teclas esc tabela asc
 
@@ -38,5 +41,9 @@ const NewTodo = ({ onNewTodo }) => {
     />
   );
 };
+
+NewTodo.propTypes = {
+  onNewTodo: PropTypes.func.isRequired,
+}
 
 export default NewTodo;
