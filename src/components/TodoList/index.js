@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import { MdDelete } from 'react-icons/md'
+import { MdDelete } from 'react-icons/md';
+
+import "./styles.css";
 
 const TodoList = ({todos, onToggle, onRemove}) => {
 
